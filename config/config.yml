@@ -1,0 +1,9 @@
+server:
+  port: 3003
+
+db:
+  host: localhost
+  port: 3306
+  name: 3fs
+  username: 3fs
+  password: 8x*LnnTU@RG%
