@@ -1,0 +1,44 @@
+version: "3.8"
+
+services:
+  mysql:
+    image: mysql:5.7
+    restart: always
+#    env_file:
+#      - .env
+    environment:
+      MYSQL_USER: 3fs
+      MYSQL_PASSWORD: 8x*LnnTU@RG%
+      MYSQL_ROOT_PASSWORD: 8x*LnnTU@RG%toor
+      MYSQL_DATABASE: 3fs
+    ports:
+      - "3306:3306"
+    expose:
+      - 3306
+    healthcheck:
+      test: "/usr/bin/mysql --user=root --password=8x*LnnTU@RG%toor --execute \"SHOW DATABASES;\""
+      interval: 2s
+      timeout: 20s
+      retries: 10
+    networks:
+      - go-mysql
+    volumes:
+      - "./.mysql-data/db:/var/lib/mysql"
+
+  app:
+    depends_on:
+      mysql:
+        condition: service_healthy
+    build: ./
+    restart: unless-stopped
+    environment:
+      - DATABASE_HOST=mysql
+    stdin_open: true
+    tty: true
+    networks:
+      - go-mysql
+    expose:
+      - 3003
+networks:
+  go-mysql:
+
