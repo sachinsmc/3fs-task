@@ -2,6 +2,7 @@ package db
 
 import (
 	"fmt"
+	"github.com/sachinsmc/3fs-task/models"
 	"os"
 
 	"github.com/spf13/viper"
@@ -40,7 +41,7 @@ func ConnectDB() {
 
 	DB.Debug()
 
-	DB.Debug().AutoMigrate()
+	DB.Debug().AutoMigrate(&models.Group{}, &models.Users{})
 
 }
 

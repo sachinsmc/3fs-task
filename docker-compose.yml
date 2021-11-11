@@ -37,6 +37,8 @@ services:
     tty: true
     networks:
       - go-mysql
+    ports:
+      - "3003:3003"
     expose:
       - 3003
 networks:
