@@ -8,7 +8,6 @@ import (
 	"github.com/sachinsmc/3fs-task/middlewares"
 )
 
-
 func Setup(app *fiber.App) {
 
 	middlewares.CORS(app)
@@ -25,9 +24,9 @@ func Setup(app *fiber.App) {
 	users := v1.Group("/users")
 
 	users.Get("/", GetAll)
-	users.Put("/", Update)
+	users.Put("/:id", Update)
 	users.Post("/", Create)
-	users.Delete("/", Remove)
+	users.Delete("/:id", Remove)
 
 	groups := v1.Group("/groups")
 

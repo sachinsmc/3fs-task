@@ -18,7 +18,7 @@ type Response struct {
 func InsertGroup(name string) *models.Group {
 	d := db.GetDB()
 	group := &models.Group{
-		ID: uuid.New(),
+		ID:   uuid.New(),
 		Name: name,
 	}
 	result := d.Create(group)
@@ -35,8 +35,6 @@ func ListAllGroups() []models.Group {
 	return groups
 }
 
-
-
 func UpdateGroup(g models.Group, Id string) *models.Group {
 	d := db.GetDB()
 	id, err := uuid.Parse(Id)
@@ -52,7 +50,6 @@ func UpdateGroup(g models.Group, Id string) *models.Group {
 }
 
 func RemoveGroup(Id string) *Response {
-	fmt.Println("Removing ID : ", Id)
 	d := db.GetDB()
 	id, err := uuid.Parse(Id)
 	if err != nil {
@@ -70,4 +67,3 @@ func RemoveGroup(Id string) *Response {
 		Message: "Group deleted successfully.",
 	}
 }
-

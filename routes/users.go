@@ -21,10 +21,14 @@ func GetAll(c *fiber.Ctx) error {
 }
 
 func Update(c *fiber.Ctx) error {
-	return c.JSON(controllers.UpdateUser(c.Params("id")))
+	u := new(models.Users)
+	if err := c.BodyParser(u); err != nil {
+		fmt.Println("Failed to read body :", c.Body())
+		return err
+	}
+	return c.JSON(controllers.UpdateUser(*u, c.Params("id")))
 }
 
 func Remove(c *fiber.Ctx) error {
-	return c.JSON(controllers.UpdateUser(c.Params("id")))
+	return c.JSON(controllers.RemoveUser(c.Params("id")))
 }
-
