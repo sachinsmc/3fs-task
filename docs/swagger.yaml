@@ -1,0 +1,327 @@
+definitions:
+  controllers.Response:
+    properties:
+      message:
+        type: string
+    type: object
+  models.CreateGroupRequest:
+    properties:
+      name:
+        type: string
+    type: object
+  models.CreateUserRequest:
+    properties:
+      email:
+        type: string
+      name:
+        type: string
+      password:
+        type: string
+    type: object
+  models.Group:
+    properties:
+      created_at:
+        type: integer
+      id:
+        type: string
+      name:
+        type: string
+      updated_at:
+        type: integer
+    type: object
+  models.Users:
+    properties:
+      created_at:
+        type: integer
+      email:
+        type: string
+      id:
+        type: string
+      name:
+        type: string
+      password:
+        type: string
+      updated_at:
+        type: integer
+    type: object
+  routes.HTTPError:
+    properties:
+      message:
+        type: string
+      status:
+        type: string
+    type: object
+info:
+  contact: {}
+paths:
+  /api/v1/groups:
+    get:
+      consumes:
+      - application/json
+      description: Get group list
+      operationId: get-groups
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Group'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/routes.HTTPError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/routes.HTTPError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/routes.HTTPError'
+      summary: Get all groups
+      tags:
+      - Group
+    post:
+      consumes:
+      - application/json
+      description: add group
+      operationId: create group
+      parameters:
+      - description: Group
+        in: body
+        name: group
+        required: true
+        schema:
+          $ref: '#/definitions/models.CreateGroupRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Group'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/routes.HTTPError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/routes.HTTPError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/routes.HTTPError'
+      summary: Create group
+      tags:
+      - Group
+  /api/v1/groups/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete group by group id
+      operationId: delete-group
+      parameters:
+      - description: Group ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/controllers.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/routes.HTTPError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/routes.HTTPError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/routes.HTTPError'
+      summary: delete a group
+      tags:
+      - Group
+    put:
+      consumes:
+      - application/json
+      description: Update Group by group id
+      operationId: update-group
+      parameters:
+      - description: Group ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Group
+        in: body
+        name: group
+        required: true
+        schema:
+          $ref: '#/definitions/models.CreateGroupRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Group'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/routes.HTTPError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/routes.HTTPError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/routes.HTTPError'
+      summary: update a group
+      tags:
+      - Group
+  /api/v1/users:
+    get:
+      consumes:
+      - application/json
+      description: Get users list
+      operationId: get-users
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Users'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/routes.HTTPError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/routes.HTTPError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/routes.HTTPError'
+      summary: Get all users
+      tags:
+      - User
+    post:
+      consumes:
+      - application/json
+      description: add user
+      operationId: get-users
+      parameters:
+      - description: User
+        in: body
+        name: user
+        required: true
+        schema:
+          $ref: '#/definitions/models.CreateUserRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Users'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/routes.HTTPError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/routes.HTTPError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/routes.HTTPError'
+      summary: Create user
+      tags:
+      - User
+  /api/v1/users/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete user by user id
+      operationId: delete-user
+      parameters:
+      - description: User ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/controllers.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/routes.HTTPError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/routes.HTTPError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/routes.HTTPError'
+      summary: delete a user
+      tags:
+      - User
+    put:
+      consumes:
+      - application/json
+      description: Update user by user id
+      operationId: update-user
+      parameters:
+      - description: User ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: User
+        in: body
+        name: user
+        required: true
+        schema:
+          $ref: '#/definitions/models.CreateUserRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Users'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/routes.HTTPError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/routes.HTTPError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/routes.HTTPError'
+      summary: update a user
+      tags:
+      - User
+swagger: "2.0"

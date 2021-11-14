@@ -37,6 +37,7 @@ func ListAllGroups() []models.Group {
 
 func UpdateGroup(g models.Group, Id string) *models.Group {
 	d := db.GetDB()
+	fmt.Println(Id)
 	id, err := uuid.Parse(Id)
 	if err != nil {
 		fmt.Println("Failed to parse uuid")
@@ -59,7 +60,6 @@ func RemoveGroup(Id string) *Response {
 		ID: id,
 	}
 	result := d.Delete(&group)
-	fmt.Println(result.Logger)
 	if result.Error != nil {
 		fmt.Println("Failed to delete group : ", result.Error)
 	}

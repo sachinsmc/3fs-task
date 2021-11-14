@@ -1,13 +1,23 @@
 package routes
 
 import (
+	swagger "github.com/arsmn/fiber-swagger/v2"
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/etag"
 	"github.com/gofiber/fiber/v2/middleware/logger"
 	"github.com/gofiber/fiber/v2/middleware/monitor"
+	_ "github.com/sachinsmc/3fs-task/docs"
 	"github.com/sachinsmc/3fs-task/middlewares"
 )
 
+// Setup
+// @title Fiber Example API
+// @version 1.0
+// @description This is a sample swagger for Fiber
+// @contact.name API Support
+// @contact.email hey@sachinsmc.me
+// @host localhost:3003
+// @BasePath /
 func Setup(app *fiber.App) {
 
 	middlewares.CORS(app)
@@ -16,6 +26,11 @@ func Setup(app *fiber.App) {
 
 	app.Use(etag.New())
 	app.Use(logger.New())
+
+	app.Get("/swagger/*", swagger.New(swagger.Config{
+		URL:         "/swagger/doc.json",
+		DeepLinking: false,
+	}))
 
 	api := app.Group("/api")
 
@@ -34,4 +49,9 @@ func Setup(app *fiber.App) {
 	groups.Put("/:id", UpdateGroup)
 	groups.Post("/", CreateGroup)
 	groups.Delete("/:id", RemoveGroup)
+}
+
+type HTTPError struct {
+	Status  string
+	Message string
 }

@@ -35,6 +35,8 @@ services:
       - DATABASE_HOST=mysql
     stdin_open: true
     tty: true
+    links:
+      - mysql:mysql
     networks:
       - go-mysql
     ports:
@@ -43,4 +45,5 @@ services:
       - 3003
 networks:
   go-mysql:
+
 

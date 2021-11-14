@@ -10,3 +10,9 @@ type Users struct {
 	CreatedAt int64     `json:"created_at" gorm:"autoCreateTime"`
 	UpdatedAt int64     `json:"updated_at" gorm:"autoUpdateTime"`
 }
+
+type CreateUserRequest struct {
+	Name     string `json:"name"`
+	Email    string `json:"email"`
+	Password string `json:"password"`
+}

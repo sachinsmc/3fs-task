@@ -21,9 +21,10 @@ func ConnectDB() {
 	}()
 
 	host := os.Getenv("DATABASE_HOST")
-	if host != "" {
-		host = os.Getenv("db.host")
+	if host == "" {
+		host = viper.GetString("db.host")
 	}
+	fmt.Println("DB Host : ", host, viper.GetString("db.host"), os.Getenv("DATABASE_HOST"))
 	dbname := viper.GetString("db.name")
 	user := viper.GetString("db.username")
 	password := viper.GetString("db.password")

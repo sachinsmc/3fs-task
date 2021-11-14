@@ -8,3 +8,7 @@ type Group struct {
 	CreatedAt int64     `json:"created_at" gorm:"autoCreateTime" gorm:"<-:create"`
 	UpdatedAt int64     `json:"updated_at" gorm:"autoUpdateTime"`
 }
+
+type CreateGroupRequest struct {
+	Name string `json:"name"`
+}
