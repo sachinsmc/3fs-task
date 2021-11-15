@@ -11,6 +11,7 @@ func Init() {
 
 	// Set the path to look for the configurations file
 	viper.AddConfigPath("./config")
+	//viper.AddConfigPath("$GOPATH/src/github.com/sachinsmc/3fs-task/config")
 
 	// Enable VIPER to read Environment Variables
 	viper.AutomaticEnv()
